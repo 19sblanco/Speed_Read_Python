@@ -153,3 +153,13 @@ Revert to default:
     speed = 5000
     Page size = 10
 """
+
+SETTINGS_MENU = """
+█▀ █▀▀ ▀█▀ ▀█▀ █ █▄░█ █▀▀ █▀
+▄█ ██▄ ░█░ ░█░ █ █░▀█ █▄█ ▄█
+    0) Go back                                  
+    1) Speed     {0}                            
+    2) Page size {1}
+    3) Revert to Default settings
+    i) More info about settings
+"""
