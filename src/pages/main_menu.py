@@ -1,4 +1,7 @@
 from pages.page import page
+from pages.gospel_page import gospel_page
+from pages.download_page import download_page
+from pages.settings_page import settings_page
 
 class main_menu(page):
     __MAIN_MENU = """
@@ -31,7 +34,17 @@ class main_menu(page):
 
 
     def handle_option(self, option):
-        pass
+        if option == "0":
+            print("Exiting, Thank you!")
+        elif option == "1":
+            gospel_page()
+        elif option == "2":
+            print("2")
+        elif option == "3":
+            download_page()
+        elif option == "4":
+            settings_page()
+        print("Exiting, main menu!")
 
 
     def display_menu(self):

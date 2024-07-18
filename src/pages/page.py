@@ -19,7 +19,7 @@ class page(ABC):
             i = input("please select an option: ")
             if re.match(pattern, i):
                 break
-        return input
+        return i
 
 
     def clear_console(self):

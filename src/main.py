@@ -1,5 +1,3 @@
-from Resources import *
-from Settings import *
 from pages.main_menu import main_menu 
 
 """
