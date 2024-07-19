@@ -4,9 +4,6 @@ import os
 import platform
 
 class page(ABC):
-    menu_options = []
-
-
     def __init__(self):
         self.clear_console()
 
@@ -16,18 +13,17 @@ class page(ABC):
         pass
 
 
-    def display_options(self):
-        mo = self.menu_options
-        for i in range(len(mo)):
-            print(f"{i}) " + str(mo[i].get_name()))
+    def display_options(self, options):
+        for i in range(len(options)):
+            print(f"{i}) " + str(options[i].get_name()))
     
 
     """
     n: int
     n is the option number to execute
     """
-    def handle_input(self, n):
-        self.menu_options[n].action()
+    def handle_input(self, n, options):
+        options[n].action()
 
 
     """
@@ -40,6 +36,8 @@ class page(ABC):
             i = input("please select an option: ")
             if re.match(pattern, i):
                 break
+            else:
+                print(f"Error: Enter an integer between and including 0 and {n-1}")
         return int(i)
 
 

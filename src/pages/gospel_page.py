@@ -1,43 +1,55 @@
+from menu_option import menu_option
 from pages.page import page
+
 
 
 class gospel_page(page):
     __COLLECTION_MENU = """
-    █▀█ █ █▀▀ █▄▀   ▄▀█   █▀▀ █▀█ █░░ █░░ █▀▀ █▀▀ ▀█▀ █ █▀█ █▄░█
-    █▀▀ █ █▄▄ █░█   █▀█   █▄▄ █▄█ █▄▄ █▄▄ ██▄ █▄▄ ░█░ █ █▄█ █░▀█
+█▀█ █ █▀▀ █▄▀   ▄▀█   █▀▀ █▀█ █░░ █░░ █▀▀ █▀▀ ▀█▀ █ █▀█ █▄░█
+█▀▀ █ █▄▄ █░█   █▀█   █▄▄ █▄█ █▄▄ █▄▄ ██▄ █▄▄ ░█░ █ █▄█ █░▀█
     """
 
-    __COLLECTION_MENU_INPUT = """
-        0) Go back
-        1) Book of Mormon
-        2) Bible Old Testament
-        3) Bible New Testament
+    __main_menu = None
+    menu_options = []
+
+
     """
-
-    HIGHEST_OPTION = 3
-
-    def __init__(self):
+    main_menu is a pointer to the constructor for the main_menu object
+    call this constructor will display the main menu page
+    """
+    def __init__(self, main_menu):
         super().__init__()
-        self.display_menu()
-        self.display_options()
-        option = super().get_input(self.HIGHEST_OPTION)
-        self.handle_option(option)
-
-    
-    def handle_option(self, option):
-        if option == "0":
-            print("0")
-        elif option == "1":
-            print("1")
-        elif option == "2":
-            print("2")
-        elif option == "3":
-            print("3")
-
-
-    def display_menu(self):
+        self.__main_menu = main_menu
         print(self.__COLLECTION_MENU)
+        self.create_options()
+        super().display_options(self.menu_options)
+        user_input = super().get_input(len(self.menu_options))
+        super().handle_input(user_input, self.menu_options)
 
 
-    def display_options(self):
-        print(self.__COLLECTION_MENU_INPUT)
+    def create_options(self):
+        self.menu_options.append(
+            menu_option(
+                "Go to Main Menu",
+                self.__main_menu
+            )
+        )
+        self.menu_options.append(
+            menu_option(
+                "Book of Mormon",
+                self.__main_menu
+            )
+        )
+        self.menu_options.append(
+            menu_option(
+                "Bible Old Testament",
+                self.__main_menu
+            )
+        )
+        self.menu_options.append(
+            menu_option(
+                "Bible New Testament",
+                self.__main_menu
+            )
+        )
+    

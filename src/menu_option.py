@@ -21,6 +21,9 @@ class menu_option():
 
     def action(self):
         if self.__parameters != None:
+            print("there are parameters")
             self.__function(self.__parameters)
         else:
+            print("NO parameters")
+            print(self.__function.__str__)
             self.__function()
