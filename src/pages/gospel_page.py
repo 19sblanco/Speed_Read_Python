@@ -10,7 +10,7 @@ class gospel_page(page):
     """
 
     __main_menu = None
-    menu_options = []
+    menu_options = None
 
 
     """
@@ -19,6 +19,7 @@ class gospel_page(page):
     """
     def __init__(self, main_menu):
         super().__init__()
+        self.menu_options = []
         self.__main_menu = main_menu
         print(self.__COLLECTION_MENU)
         self.create_options()

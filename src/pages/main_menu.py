@@ -20,11 +20,12 @@ class main_menu(page):
                                                 Created by Steven Blanco
     """
 
-    menu_options = []
+    menu_options = None
 
 
     def __init__(self):
         super().__init__()
+        self.menu_options = []
         print(self.__MAIN_MENU)
         self.create_options()
         super().display_options(self.menu_options)
