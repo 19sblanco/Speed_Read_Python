@@ -1,7 +1,7 @@
 from pages.page import page
 
 
-class download_page(page):
+class online_content_page(page):
     __DOWNLOAD_MENU = "Welcome to download page"
 
     __DOWNLOAD_MENU_INPUT = "Please enter a url"

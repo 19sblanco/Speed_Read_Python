@@ -1,55 +1,57 @@
+from menu_option import menu_option
 from pages.page import page
 from pages.gospel_page import gospel_page
-from pages.download_page import download_page
+from pages.online_content_page import online_content_page
 from pages.settings_page import settings_page
 
 class main_menu(page):
     __MAIN_MENU = """
-    ░██████╗██████╗░███████╗███████╗██████╗░██████╗░███████╗░█████╗░██████╗░
-    ██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗
-    ╚█████╗░██████╔╝█████╗░░█████╗░░██║░░██║██████╔╝█████╗░░███████║██║░░██║
-    ░╚═══██╗██╔═══╝░██╔══╝░░██╔══╝░░██║░░██║██╔══██╗██╔══╝░░██╔══██║██║░░██║
-    ██████╔╝██║░░░░░███████╗███████╗██████╔╝██║░░██║███████╗██║░░██║██████╔╝
-    ╚═════╝░╚═╝░░░░░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═════╝░
-                                                    Created by Steven Blanco
+░██████╗██████╗░███████╗███████╗██████╗░██████╗░███████╗░█████╗░██████╗░
+██╔════╝██╔══██╗██╔════╝██╔════╝██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔══██╗
+╚█████╗░██████╔╝█████╗░░█████╗░░██║░░██║██████╔╝█████╗░░███████║██║░░██║
+░╚═══██╗██╔═══╝░██╔══╝░░██╔══╝░░██║░░██║██╔══██╗██╔══╝░░██╔══██║██║░░██║
+██████╔╝██║░░░░░███████╗███████╗██████╔╝██║░░██║███████╗██║░░██║██████╔╝
+╚═════╝░╚═╝░░░░░╚══════╝╚══════╝╚═════╝░╚═╝░░╚═╝╚══════╝╚═╝░░╚═╝╚═════╝░
+                                                Created by Steven Blanco
     """
-
-    __MAIN_MENU_INPUT = """
-        0) Exit
-        1) Read Gospel library
-        2) Read Downloaded content
-        3) Download content
-        4) Settings
-    """
-
-    HIGHEST_OPTION = 4
-
 
     def __init__(self):
         super().__init__()
-        self.display_menu()
-        self.display_options()
-        option = super().get_input(self.HIGHEST_OPTION)
-        self.handle_option(option)
-
-
-    def handle_option(self, option):
-        if option == "0":
-            print("Exiting, Thank you!")
-        elif option == "1":
-            gospel_page()
-        elif option == "2":
-            print("2")
-        elif option == "3":
-            download_page()
-        elif option == "4":
-            settings_page()
-        print("Exiting, main menu!")
-
-
-    def display_menu(self):
         print(self.__MAIN_MENU)
+        self.create_options()
+        super().display_options()
+        n = len(super().menu_options)
+        user_input = super().get_input(n)
+        super().handle_input(user_input)
 
 
-    def display_options(self):
-        print(self.__MAIN_MENU_INPUT)
+    def create_options(self):
+        super().menu_options.append(
+            menu_option(
+                "Exit",
+                self.exit_program
+            )
+        )
+        super().menu_options.append(
+            menu_option(
+                "Read Gospel Library",
+                gospel_page
+            )
+        )
+        super().menu_options.append(
+            menu_option(
+                "Online Content",
+                online_content_page
+            )
+        )
+        super().menu_options.append(
+            menu_option(
+                "Settings",
+                settings_page
+            )
+        )
+            
+
+    def exit_program(self):
+        print("Thanks for reading!")
+        exit()
