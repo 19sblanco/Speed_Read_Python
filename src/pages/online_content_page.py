@@ -1,33 +1,35 @@
+from menu_option import menu_option
 from pages.page import page
 
 
 class online_content_page(page):
     __DOWNLOAD_MENU = "Welcome to download page"
 
-    __DOWNLOAD_MENU_INPUT = "Please enter a url"
+    __main_menu = None
+    __menu_options = None
 
-    def __init__(self):
+    def __init__(self, main_menu):
         super().__init__()
-        self.display_menu()
-        self.display_options()
-        url = self.get_url()
-        self.handle_option(url)
-
-
-    def get_url(self):
-        url = input("Enter a url")
-        return url
-
-    
-    def handle_option(self, option):
-        print("url: " + option)
-        print("getting url from the web...")
-
-
-    def display_menu(self):
+        self.__menu_options = []
+        self.__main_menu = main_menu
         print(self.__DOWNLOAD_MENU)
+        self.create_options()
+        super().display_options(self.__menu_options)
+        user_input = super().get_input(len(self.__menu_options))
+        super().handle_input(user_input, self.__menu_options)
 
 
-    def display_options(self):
-        print(self.__DOWNLOAD_MENU_INPUT)
+    def create_options(self):
+        self.__menu_options.append(
+            menu_option(
+                "Online Library",
+                self.__main_menu
+            )
+        )
+        self.__menu_options.append(
+            menu_option(
+                "Add New by URL",
+                self.__main_menu
+            )
+        )
 
