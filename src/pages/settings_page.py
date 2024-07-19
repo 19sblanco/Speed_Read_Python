@@ -1,43 +1,47 @@
+from menu_option import menu_option
 from pages.page import page
 
 
 class settings_page(page):
     __SETTINGS_MENU = """
-    █▀ █▀▀ ▀█▀ ▀█▀ █ █▄░█ █▀▀ █▀
-    ▄█ ██▄ ░█░ ░█░ █ █░▀█ █▄█ ▄█
-    """
+███████╗███████╗████████╗████████╗██╗███╗   ██╗ ██████╗ ███████╗
+██╔════╝██╔════╝╚══██╔══╝╚══██╔══╝██║████╗  ██║██╔════╝ ██╔════╝
+███████╗█████╗     ██║      ██║   ██║██╔██╗ ██║██║  ███╗███████╗
+╚════██║██╔══╝     ██║      ██║   ██║██║╚██╗██║██║   ██║╚════██║
+███████║███████╗   ██║      ██║   ██║██║ ╚████║╚██████╔╝███████║
+╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
+                                                                """
 
-    __SETTINGS_MENU_INPUT = """
-        0) Go back                                  
-        1) Speed     
-        2) Revert to Default settings
-        3) More info about settings
-    """
+    __main_menu = None
+    __menu_options = None
 
-    HIGHEST_OPTION = 3
 
-    def __init__(self):
+    def __init__(self, main_menu):
         super().__init__()
-        self.display_menu()
-        self.display_options()
-        option = super().get_input(self.HIGHEST_OPTION)
-        self.handle_option(option)
-
-    
-    def handle_option(self, option):
-        if option == "0":
-            print("0")
-        elif option == "1":
-            print("1")
-        elif option == "2":
-            print("2")
-        elif option == "3":
-            print("3")
-
-
-    def display_menu(self):
+        self.__menu_options = []
+        self.__main_menu = main_menu
         print(self.__SETTINGS_MENU)
+        self.create_options()
+        super().display_options(self.__menu_options)
+        user_input = super().get_input(len(self.__menu_options))
+        super().handle_input(user_input, self.__menu_options)
 
 
-    def display_options(self):
-        print(self.__SETTINGS_MENU_INPUT)
+    def create_options(self):
+        self.__menu_options.append(
+            menu_option(
+                "Go to Main Menu",
+                self.__main_menu
+            )
+        )
+        self.__menu_options.append(
+            menu_option(
+                "Change Reading Speed",
+                self.change_speed
+            )
+        )
+
+
+    def change_speed(self):
+        print("change_speed")
+        pass
