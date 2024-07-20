@@ -1,5 +1,6 @@
 from menu_option import menu_option
 from pages.page import page
+from pages.bom_page import bom_page
 
 
 
@@ -49,7 +50,8 @@ class gospel_page(page):
         self.__menu_options.append(
             menu_option(
                 "Book of Mormon",
-                self.__main_menu
+                bom_page,
+                self.__init__
             )
         )
         self.__menu_options.append(

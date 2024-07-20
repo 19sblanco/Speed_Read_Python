@@ -3,6 +3,7 @@ import re
 import os
 import platform
 
+
 class page(ABC):
     def __init__(self):
         self.clear_console()
