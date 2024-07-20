@@ -69,14 +69,8 @@ class bom_page(page):
 
 
     def read_book(self, book_title):
-        # open bom
         with open("texts/gospel_text/BookofMormon.txt", "r") as bom_file:
             text = bom_file.read()
             m = re.search(book_title, text)
-            # set pointer to book title
             pointer = m.start()
-            # open read page
             read_page(text, pointer)
-
-            # pass the pointer and file along
-

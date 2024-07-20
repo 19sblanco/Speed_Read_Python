@@ -32,7 +32,7 @@ class page(ABC):
     n is the number of options
     """
     def get_input(self, n):
-        pattern = f"[0-{n-1}]"
+        pattern = rf'^(?:[0-9]|[1-9][0-9]*)$'
         while True:
             i = input("please select an option: ")
             if re.match(pattern, i):
