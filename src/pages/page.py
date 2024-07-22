@@ -35,7 +35,7 @@ class page(ABC):
         pattern = rf'^(?:[0-9]|[1-9][0-9]*)$'
         while True:
             i = input("please select an option: ")
-            if re.match(pattern, i):
+            if re.match(pattern, i) and int(i) < n:
                 break
             else:
                 print(f"Error: Enter an integer between and including 0 and {n-1}")
