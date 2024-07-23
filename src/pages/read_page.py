@@ -7,4 +7,4 @@ class read_page():
         self.__main_menu = main_menu
         print("in read_page")
         print(pointer)
-        print(text[pointer:pointer+100])
+        print(text[pointer:pointer+500])

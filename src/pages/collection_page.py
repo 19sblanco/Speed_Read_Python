@@ -32,18 +32,15 @@ class collection_page(page):
                 menu_option(
                     book_list[i],
                     self.read_book,
-                    [collection_title, book_list[i]]
+                    [collection_title, book_list[i], main_menu]
                 )
             )
 
 
-    def read_book(self, title_list):
-        with open(f"texts/gospel_text/{title_list[0]}.txt", "r") as bom_file:
+    def read_book(self, arguments):
+        with open(f"texts/gospel_text/{arguments[0]}.txt", "r") as bom_file:
             text = bom_file.read()
-            m = re.search(title_list[1], text)
+            m = re.search(arguments[1], text)
             pointer = m.start()
-            print("got hereeee")
-            print("got hereeee")
-            print("got hereeee")
-            read_page(text, pointer)
+            read_page(text, pointer, arguments[2])
 
