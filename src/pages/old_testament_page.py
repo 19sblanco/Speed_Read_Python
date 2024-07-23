@@ -55,10 +55,4 @@ class old_testament_page(collection_page):
     __menu_options = None
 
     def __init__(self, menu_list):
-        super().__init__()
-        self.__menu_options = []
-        print(self.__OLD_TESTAMENT_MENU)
-        super().create_options(self.__menu_options, "BibleOldTestament", self.__book_list, menu_list[0], menu_list[1])
-        super().display_options(self.__menu_options)
-        user_input = super().get_input(len(self.__menu_options))
-        super().handle_input(user_input, self.__book_list)
+        super().__init__(self.__OLD_TESTAMENT_MENU, self.__menu_options, "BibleNewTestament", self.__book_list, menu_list[0], menu_list[1])

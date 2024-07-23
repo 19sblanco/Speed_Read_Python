@@ -42,7 +42,7 @@ class new_testament_page(collection_page):
         "The Revelation of Saint John the Divine",
     ]
 
-    __menu_options = []
+    __menu_options = None
 
     def __init__(self, menu_list):
         super().__init__(self.__NEW_TESTAMENT_MENU, self.__menu_options, "BibleNewTestament", self.__book_list, menu_list[0], menu_list[1])

@@ -7,10 +7,11 @@ class collection_page(page):
     def __init__(self, menu, menu_options, collection_name, book_list, main_menu, previous_menu):
         super().__init__()
         print(menu)
+        menu_options = []
         self.create_options(menu_options, collection_name, book_list, main_menu, previous_menu)
         super().display_options(menu_options)
         user_input = super().get_input(len(menu_options))
-        super().handle_input(user_input, book_list)
+        super().handle_input(user_input, menu_options)
 
     def create_options(self, menu_options, collection_title, book_list, main_menu, previous_menu):
         menu_options.append(
@@ -41,5 +42,8 @@ class collection_page(page):
             text = bom_file.read()
             m = re.search(title_list[1], text)
             pointer = m.start()
+            print("got hereeee")
+            print("got hereeee")
+            print("got hereeee")
             read_page(text, pointer)
 
