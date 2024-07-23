@@ -12,14 +12,13 @@ class read_page(page):
 """
     __main_menu = None
 
-    def __init__(self, text, pointer, main_menu):
+    def __init__(self, lines, start_idx, main_menu):
         super().__init__()
         self.__main_menu = main_menu
         print(self.__READ_MENU)
         # TODO: load settings
-        lines = text.split("\n")
         num_lines = 0
-        for i in range(len(lines)):
+        for i in range(start_idx, len(lines)):
             print(lines[i])
             num_lines += 1
             time.sleep(2)

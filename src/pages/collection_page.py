@@ -39,8 +39,10 @@ class collection_page(page):
 
     def read_book(self, arguments):
         with open(f"texts/gospel_text/{arguments[0]}.txt", "r") as bom_file:
-            text = bom_file.read()
-            m = re.search(arguments[1], text)
-            pointer = m.start()
-            read_page(text, pointer, arguments[2])
+            lines = bom_file.read().split("\n")
+            idx = None
+            for i in range(len(lines)):
+                if re.search(arguments[1], lines[i]):
+                    idx = i
+            read_page(lines, idx, arguments[2])
 
