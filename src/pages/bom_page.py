@@ -21,6 +21,7 @@ class bom_page(page):
 ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═══╝ 
 """
     
+    __main_menu = None
     __previous_menu = None
     __menu_options = None
     __book_list = [
@@ -41,10 +42,12 @@ class bom_page(page):
         "THE BOOK OF MORONI",
     ]
 
-    def __init__(self, previous_menu):
+    def __init__(self, menu_list):
         super().__init__()
         self.__menu_options = []
-        self.__previous_menu = previous_menu
+        print(menu_list)
+        self.__main_menu = menu_list[0]
+        self.__previous_menu = menu_list[1]
         print(self.__BOM_MENU)
         self.create_options()
         super().display_options(self.__menu_options)
@@ -54,8 +57,16 @@ class bom_page(page):
     def create_options(self):
         self.__menu_options.append(
             menu_option(
+                "Go to Main Menu",
+                self.__main_menu
+            )
+        )
+        print(self.__previous_menu)
+        self.__menu_options.append(
+            menu_option(
                 "Go back",
-                self.__previous_menu
+                self.__previous_menu,
+                self.__main_menu
             )
         )
         for i in range(len(self.__book_list)):

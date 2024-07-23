@@ -51,7 +51,7 @@ class gospel_page(page):
             menu_option(
                 "Book of Mormon",
                 bom_page,
-                self.__init__
+                [self.__main_menu, self.__init__]
             )
         )
         self.__menu_options.append(
