@@ -9,11 +9,6 @@ class page(ABC):
         self.clear_console()
 
     
-    @abstractmethod
-    def create_options(self):
-        pass
-
-
     def display_options(self, options):
         for i in range(len(options)):
             print(f"{i}) " + str(options[i].get_name()))
@@ -30,6 +25,7 @@ class page(ABC):
     """
     n: int
     n is the number of options
+    we want an integer between [0, n)
     """
     def get_input(self, n):
         pattern = rf'^(?:[0-9]|[1-9][0-9]*)$'

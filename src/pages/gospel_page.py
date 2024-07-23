@@ -1,6 +1,7 @@
 from menu_option import menu_option
 from pages.page import page
 from pages.bom_page import bom_page
+from pages.old_testament_page import old_testament_page
 
 
 
@@ -25,10 +26,6 @@ class gospel_page(page):
     __menu_options = None
 
 
-    """
-    main_menu is a pointer to the constructor for the main_menu object
-    call this constructor will display the main menu page
-    """
     def __init__(self, main_menu):
         super().__init__()
         self.__menu_options = []
@@ -57,7 +54,8 @@ class gospel_page(page):
         self.__menu_options.append(
             menu_option(
                 "Bible Old Testament",
-                self.__main_menu
+                old_testament_page,
+                [self.__main_menu, self.__init__]
             )
         )
         self.__menu_options.append(
