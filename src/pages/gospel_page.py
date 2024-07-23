@@ -2,6 +2,7 @@ from menu_option import menu_option
 from pages.page import page
 from pages.bom_page import bom_page
 from pages.old_testament_page import old_testament_page
+from pages.new_testament_page import new_testament_page
 
 
 
@@ -61,7 +62,8 @@ class gospel_page(page):
         self.__menu_options.append(
             menu_option(
                 "Bible New Testament",
-                self.__main_menu
+                new_testament_page,
+                [self.__main_menu, self.__init__]
             )
         )
     
