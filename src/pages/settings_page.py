@@ -33,9 +33,10 @@ class settings_page(page):
         self.__menu_options = []
         self.__main_menu = main_menu
         print(self.__SETTINGS_MENU)
+        self.load_settings()
+        self.display_settings()
         self.create_options()
         super().display_options(self.__menu_options)
-        self.load_settings()
         user_input = super().get_input(len(self.__menu_options))
         super().handle_input(user_input, self.__menu_options)
 
@@ -54,10 +55,12 @@ class settings_page(page):
     
     def load_settings(self):
         with open(self.__SAVE_FILE, "r") as save_file:
-            self.__speed = json.load(save_file)
+            self.__speed = json.load(save_file)["speed"]
+
 
     def display_settings(self):
-        pass
+        print("Speed: ", self.__speed)
+        print()
 
 
     def create_options(self):
@@ -76,8 +79,7 @@ class settings_page(page):
 
 
     def change_speed(self):
-        print("\nCurrent speed:", str(self.__speed))
         max_speed = 100
-        self.__speed = super().get_input(max_speed)
+        self.__speed = super().get_input(max_speed, "new speed: ")
         self.save_settings()
         self.__init__(self.__main_menu)

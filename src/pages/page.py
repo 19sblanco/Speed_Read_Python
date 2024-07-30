@@ -27,10 +27,10 @@ class page(ABC):
     n is the number of options
     we want an integer between [0, n)
     """
-    def get_input(self, n):
+    def get_input(self, n, message="please select an option: "):
         pattern = rf'^(?:[0-9]|[1-9][0-9]*)$'
         while True:
-            i = input("please select an option: ")
+            i = input(message)
             if re.match(pattern, i) and int(i) < n:
                 break
             else:
