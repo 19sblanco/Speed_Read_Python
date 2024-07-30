@@ -7,10 +7,7 @@ from pages.page import page
 
 """
 TODO
-allow user to 
-    * change settings
-    * save settings
-when loading settings object, load save file settings
+display settings
 ? is it possible to only have this program edit that file?
 """
 
@@ -24,6 +21,7 @@ class settings_page(page):
 ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
 """
 
+    __SAVE_FILE = "save.txt"
     __main_menu = None
     __menu_options = None
 
@@ -37,10 +35,9 @@ class settings_page(page):
         print(self.__SETTINGS_MENU)
         self.create_options()
         super().display_options(self.__menu_options)
+        self.load_settings()
         user_input = super().get_input(len(self.__menu_options))
         super().handle_input(user_input, self.__menu_options)
-
-        self.save_settings()
 
 
     def save_settings(self):
@@ -48,11 +45,19 @@ class settings_page(page):
             "speed": self.__speed,
         }
 
-        with open("save.txt", "w") as save_file:
+        with open(self.__SAVE_FILE, "w") as save_file:
             json.dump(data, save_file, indent=4)
         print("save complete...")
         time.sleep(1)
         self.__init__(self.__main_menu)
+
+    
+    def load_settings(self):
+        with open(self.__SAVE_FILE, "r") as save_file:
+            self.__speed = json.load(save_file)
+
+    def display_settings(self):
+        pass
 
 
     def create_options(self):
@@ -74,3 +79,5 @@ class settings_page(page):
         print("\nCurrent speed:", str(self.__speed))
         max_speed = 100
         self.__speed = super().get_input(max_speed)
+        self.save_settings()
+        self.__init__(self.__main_menu)
