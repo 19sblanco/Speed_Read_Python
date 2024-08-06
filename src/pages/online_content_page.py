@@ -67,16 +67,31 @@ class online_content_page(page):
             except:
                 print("Invalid url")
         
-        # print <h1>
-        h1 = soup.h1.get_text()
-        print()
-        print(h1)
-        print()
+        title = soup.h1.get_text()
         
-        # print all <p>
+        content = ""
         all_ps = soup.find_all('p')
         for p in all_ps:
-            print(p.get_text())
+            content += p.get_text()
+        content = content.replace("\n", "").replace("\r", "")
+
+        # format content
+        formatted_content = ""
+        text_length = 65 
+
+        new_line = False
+        for i in range(len(content)):
+            formatted_content += content[i]
+            if i % text_length == 0:
+                new_line = True
+            if new_line == True and (content[i] == " " or content[i] == "\t"):
+                formatted_content += "\n"
+                new_line = False
+        print(formatted_content)
+
+
+
+
 
 
 
@@ -90,5 +105,7 @@ process the url with beautiful soup and get
     * <p>
 format text 
     * make text 70 wide
+    1) get rid of new lines
+    2) 
 save text in file named <h1> "replace space with '_'"
 """
