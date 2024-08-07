@@ -2,7 +2,7 @@ from menu_option import menu_option
 from pages.page import page
 import requests
 from bs4 import BeautifulSoup
-import time
+import re
 
 
 class online_content_page(page):
@@ -67,18 +67,18 @@ class online_content_page(page):
             except:
                 print("Invalid url")
         
-        title = soup.h1.get_text()
-        
+        # get title and content removing excessive white space
+        title = soup.h1.get_text().strip()
         content = ""
         all_ps = soup.find_all('p')
         for p in all_ps:
             content += p.get_text()
         content = content.replace("\n", "").replace("\r", "")
+        content = re.sub(r" {4,}", " ", content)
 
-        # format content
+        # format content into consistant line lengths
         formatted_content = ""
         text_length = 65 
-
         new_line = False
         for i in range(len(content)):
             formatted_content += content[i]
@@ -87,7 +87,13 @@ class online_content_page(page):
             if new_line == True and (content[i] == " " or content[i] == "\t"):
                 formatted_content += "\n"
                 new_line = False
-        print(formatted_content)
+        
+        # save to file
+        file_name = "texts/uploaded_text/" + title.strip().replace(" ", "_") + ".txt"
+        with open(file_name, "w") as file:
+            file.write(title)
+            file.write(formatted_content)
+
 
 
 
