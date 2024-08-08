@@ -27,3 +27,20 @@ class read_page(page):
                 super().clear_console()
                 print(self.__READ_MENU)
 
+
+"""
+display 10 lines at a time
+when you display a line, get rid of the top line and move everything up
+    * keep a list of 10 lines to display
+    * update the list each time
+    * display lines
+
+
+    def display lines
+
+    def update lines
+
+    def increase speed
+
+    def decrease speed
+"""

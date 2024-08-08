@@ -68,7 +68,6 @@ class settings_page(page):
        
 
 
-
     def display_settings(self):
         print("Speed: ", self.__speed)
         print()
