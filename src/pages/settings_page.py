@@ -1,5 +1,6 @@
 import json
 import time
+import os
 
 from menu_option import menu_option
 from pages.page import page
@@ -21,7 +22,7 @@ class settings_page(page):
 ╚══════╝╚══════╝   ╚═╝      ╚═╝   ╚═╝╚═╝  ╚═══╝ ╚═════╝ ╚══════╝
 """
 
-    __SAVE_FILE = "save.txt"
+    __SAVE_FILE = "save.json"
     __main_menu = None
     __menu_options = None
 
@@ -54,8 +55,18 @@ class settings_page(page):
 
     
     def load_settings(self):
-        with open(self.__SAVE_FILE, "r") as save_file:
-            self.__speed = json.load(save_file)["speed"]
+        if os.path.exists(self.__SAVE_FILE):
+            with open(self.__SAVE_FILE, "r") as save_file:
+                self.__speed = json.load(save_file)["speed"]
+        else:
+            data = {
+                "speed": self.__speed,
+            }
+            with open(self.__SAVE_FILE, "w") as save_file:
+                json.dump(data, save_file, indent=4)
+            self.__init__(self.__main_menu)
+       
+
 
 
     def display_settings(self):

@@ -93,6 +93,8 @@ class online_content_page(page):
         with open(file_name, "w") as file:
             file.write(title)
             file.write(formatted_content)
+        
+        self.__init__(self.__main_menu)
 
 
 
