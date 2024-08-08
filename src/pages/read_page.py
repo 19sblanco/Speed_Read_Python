@@ -31,17 +31,6 @@ class read_page(page):
 
 
     def display(self):
-        """
-        num_lines = 0
-        for i in range(self.__start_idx, len(self.__lines)):
-            print(self.__lines[i])
-            num_lines += 1
-            time.sleep(self.__speed)
-            if num_lines == 10:
-                num_lines = 0
-                super().clear_console()
-                print(self.__READ_MENU)
-        """
         for i in range(self.__start_idx, len(self.__lines)):
             self.__lines_to_display.append(self.__lines[i])
             super().clear_console()
@@ -80,23 +69,3 @@ class read_page(page):
 
 
 
-
-"""
-display 10 lines at a time
-when you display a line, get rid of the top line and move everything up
-    * keep a list of 10 lines to display
-    * update the list each time
-    * display lines
-
-
-    def display lines
-
-    def update lines
-
-    def increase speed
-
-    def decrease speed
-
-
-display 10 lines, after 10th line is displayed put the 10th line at the top of the screen and start displaying other lines
-"""
