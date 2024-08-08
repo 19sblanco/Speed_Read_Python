@@ -19,6 +19,7 @@ class read_page(page):
     __SAVE_FILE = "save.json"
     __speed = 5 # default speed
 
+
     def __init__(self, lines, start_idx, main_menu):
         super().__init__()
         self.__lines = lines
@@ -26,25 +27,35 @@ class read_page(page):
         self.__main_menu = main_menu
         print(self.__READ_MENU)
         self.load_settings()
+        self.display()
+
+
+    def display(self):
+        """
         num_lines = 0
-        for i in range(start_idx, len(lines)):
-            print(lines[i])
+        for i in range(self.__start_idx, len(self.__lines)):
+            print(self.__lines[i])
             num_lines += 1
             time.sleep(self.__speed)
             if num_lines == 10:
                 num_lines = 0
                 super().clear_console()
                 print(self.__READ_MENU)
+        """
+        for i in range(self.__start_idx, len(self.__lines)):
+            self.__lines_to_display.append(self.__lines[i])
+            super().clear_console()
+            print(self.__READ_MENU)
+            for j in range(len(self.__lines_to_display)):
+                print(self.__lines_to_display[j])
+            time.sleep(self.__speed)
 
-    def display_lines(self):
-        pass
+            if len(self.__lines_to_display) == 10:
+                last_line = self.__lines_to_display[-1]
+                self.__lines_to_display = []
+                self.__lines_to_display.append(last_line)
 
     
-    def update_lines(self):
-        pass
-
-    
-
     def increase_speed(self):
         pass
 
