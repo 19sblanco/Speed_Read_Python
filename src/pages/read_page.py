@@ -15,8 +15,9 @@ class read_page(page):
 ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝ ╚═╝
 """
 
-    def __init__(self, lines, start_idx, main_menu):
+    def __init__(self, what_users_reading, lines, start_idx, main_menu):
         super().__init__()
+        self.__what_users_reading = what_users_reading
         self.__lines = lines
         self.__curr_idx = start_idx
         self.__main_menu = main_menu
@@ -79,17 +80,41 @@ class read_page(page):
 
     def load_settings(self):
         if os.path.exists(self.__SAVE_FILE):
-            with open(self.__SAVE_FILE, "r") as save_file:
-                data = json.load(save_file)
-                self.__speed = data["speed"]
-                self.__curr_idx = data["line_number"]
+            try:
+                with open(self.__SAVE_FILE, "r") as save_file:
+                    data = json.load(save_file)
+                    self.__speed = data["speed"]
+                    self.__curr_idx = data[f"{self.__what_users_reading}_line_number"]
+            except:
+                self.save_settings()
         else:
-            self.save_settings()
+            self.create_settings()
 
     def save_settings(self):
+        updates = {
+            "speed": self.__speed,
+            f"{self.__what_users_reading}_line_number": self.__curr_idx
+        }
+        
+        try:
+            # Try to read existing data
+            with open(self.__SAVE_FILE, "r") as save_file:
+                data = json.load(save_file)
+        except (FileNotFoundError, json.JSONDecodeError):
+            # If file doesn't exist or is invalid, start with an empty dict
+            data = {}
+        
+        # Update data
+        data.update(updates)
+        
+        # Write updated data back to file
+        with open(self.__SAVE_FILE, "w") as save_file:
+            json.dump(data, save_file, indent=4)
+
+    def create_settings(self):
         data = {
-                "speed": self.__speed,
-                "line_number": self.__curr_idx
-            }
+            "speed": self.__speed,
+            f"{self.__what_users_reading}_line_number": self.__curr_idx
+        }
         with open(self.__SAVE_FILE, "w") as save_file:
             json.dump(data, save_file, indent=4)

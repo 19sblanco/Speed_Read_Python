@@ -38,11 +38,14 @@ class collection_page(page):
 
 
     def read_book(self, arguments):
-        with open(f"texts/gospel_text/{arguments[0]}.txt", "r") as bom_file:
+        collection_name = arguments[0]
+        book_name = arguments[1]
+        with open(f"texts/gospel_text/{collection_name}.txt", "r") as bom_file:
             lines = bom_file.read().split("\n")
             idx = None
             for i in range(len(lines)):
                 if re.search(arguments[1], lines[i]):
                     idx = i
-            read_page(lines, idx, arguments[2])
+            what_users_reading = collection_name + "_" + book_name
+            read_page(what_users_reading, lines, idx, arguments[2])
 
