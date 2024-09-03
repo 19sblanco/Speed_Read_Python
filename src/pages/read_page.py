@@ -80,11 +80,16 @@ class read_page(page):
     def load_settings(self):
         if os.path.exists(self.__SAVE_FILE):
             with open(self.__SAVE_FILE, "r") as save_file:
-                self.__speed = json.load(save_file)["speed"]
+                data = json.load(save_file)
+                self.__speed = data["speed"]
+                self.__curr_idx = data["line_number"]
         else:
             self.save_settings()
 
     def save_settings(self):
-        data = {"speed": self.__speed}
+        data = {
+                "speed": self.__speed,
+                "line_number": self.__curr_idx
+            }
         with open(self.__SAVE_FILE, "w") as save_file:
             json.dump(data, save_file, indent=4)
