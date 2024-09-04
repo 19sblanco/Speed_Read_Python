@@ -17,11 +17,11 @@ def sigint_handler(sig, frame):
 """
 project plans in file todo and specifications.txt
 """
-
 def main():
     signal.signal(signal.SIGINT, sigint_handler)
     mm = main_menu()
 
 
-main()
+if __name__ == "__main__":
+    main()
 
