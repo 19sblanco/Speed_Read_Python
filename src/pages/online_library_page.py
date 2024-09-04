@@ -1,6 +1,7 @@
 from menu_option import menu_option
 from pages.page import page
 from pages.read_page import read_page
+import time
 import os
 
 
@@ -42,9 +43,17 @@ class online_library_page(page):
                 "Go back",
                 self.__online_content,
                 self.__main_menu
+<<<<<<< HEAD
+=======
             )
         )
-        
+        self.__menu_options.append(
+            menu_option(
+                "Remove content",
+                self.remove_content,
+>>>>>>> remove_content
+            )
+        )
         dir_path = "texts/uploaded_text/"
         for filename in os.listdir(dir_path):
             filepath = dir_path + filename
@@ -55,6 +64,32 @@ class online_library_page(page):
                     [filepath, filename]
                 )
             )
+
+    
+    def remove_content(self):
+        print("Enter number associated with content to remove")
+        user_input = super().get_input(len(self.__menu_options))
+        if user_input == 1:
+            user_input = 0
+        if user_input == 0:
+            super().handle_input(user_input, self.__menu_options)
+        
+        content_name = self.__menu_options[user_input].get_name()
+        file_path = "texts/uploaded_text/" + content_name
+        try:
+            os.remove(file_path)
+            print("File has been deleted successfully")
+        except FileNotFoundError:
+            print("File does not exist")
+        except PermissionError:
+            print("Permission denied: cannot delete")
+        except Exception as e:
+            print(f"An error occurred while deleting: {str(e)}")
+        time.sleep(2)
+        args = [self.__online_content, self.__main_menu]
+        self.__init__(args)
+
+        
 
     def read_book(self, args):
         filepath = args[0]
