@@ -6,12 +6,6 @@ from menu_option import menu_option
 from pages.page import page
 
 
-"""
-TODO
-display settings
-? is it possible to only have this program edit that file?
-"""
-
 class settings_page(page):
     __SETTINGS_MENU = """
 ███████╗███████╗████████╗████████╗██╗███╗   ██╗ ██████╗ ███████╗
@@ -43,17 +37,25 @@ class settings_page(page):
 
 
     def save_settings(self):
-        data = {
-            "speed": self.__speed,
-        }
+        # Read the existing data
+        if os.path.exists(self.__SAVE_FILE):
+            with open(self.__SAVE_FILE, "r") as save_file:
+                data = json.load(save_file)
+        else:
+            data = {}
 
+        # Update only the speed field
+        data["speed"] = self.__speed
+
+        # Write the updated data back to the file
         with open(self.__SAVE_FILE, "w") as save_file:
             json.dump(data, save_file, indent=4)
-        print("save complete...")
+        
+        print("Save complete...")
         time.sleep(1)
-        self.__init__(self.__main_menu)
+        self.__init__(self.__main_menu)   
 
-    
+
     def load_settings(self):
         if os.path.exists(self.__SAVE_FILE):
             with open(self.__SAVE_FILE, "r") as save_file:
@@ -86,6 +88,23 @@ class settings_page(page):
                 self.change_speed
             )
         )
+        self.__menu_options.append(
+            menu_option(
+                "Reset Book Marks",
+                self.reset_book_marks
+            )
+        )
+
+
+    def reset_book_marks(self):
+        data = {
+            "speed": self.__speed,
+        }
+        with open("save.json", "w") as save_file:
+            json.dump(data, save_file, indent=4)
+        print("save complete...")
+        time.sleep(1)
+        self.__init__(self.__main_menu)
 
 
     def change_speed(self):

@@ -3,6 +3,9 @@ from menu_option import menu_option
 from pages.page import page
 from pages.read_page import read_page
 
+"""
+Parent class to the biblical collections (Book of Mormon, Old and New Testament)
+"""
 class collection_page(page):
     def __init__(self, menu, menu_options, collection_name, book_list, main_menu, previous_menu):
         super().__init__()

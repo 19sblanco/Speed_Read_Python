@@ -5,6 +5,9 @@ import json
 from pynput import keyboard
 import sys
 
+"""
+displays text for the user to read
+"""
 class read_page(page):
     __READ_MENU = """
 ██████╗ ███████╗ █████╗ ██████╗ ██╗         
@@ -35,6 +38,12 @@ class read_page(page):
         self.__listener = keyboard.Listener(on_press=self.change_speed)
         self.__listener.start()
 
+    """
+    display the reading page
+    displays self.__READ_MENU
+    displays each line from the text input file, line by line
+        seperated in time by self.__speed
+    """
     def display(self):
         self.__running = True
         finished_book = False
@@ -61,6 +70,9 @@ class read_page(page):
         elif key == keyboard.Key.esc:
             self.__running = False  # Stop the display loop
 
+    """
+    called when exiting read_page
+    """
     def cleanup(self):
         self.__listener.stop()
         self.save_settings()
