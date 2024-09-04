@@ -43,15 +43,12 @@ class online_library_page(page):
                 "Go back",
                 self.__online_content,
                 self.__main_menu
-<<<<<<< HEAD
-=======
             )
         )
         self.__menu_options.append(
             menu_option(
                 "Remove content",
                 self.remove_content,
->>>>>>> remove_content
             )
         )
         dir_path = "texts/uploaded_text/"
