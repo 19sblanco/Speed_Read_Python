@@ -1,5 +1,6 @@
 from menu_option import menu_option
 from pages.page import page
+from pages.online_library_page import online_library_page
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -46,7 +47,8 @@ class online_content_page(page):
         self.__menu_options.append(
             menu_option(
                 "Online Library",
-                self.__main_menu
+                online_library_page,
+                [self.__init__, self.__main_menu]
             )
         )
         self.__menu_options.append(
