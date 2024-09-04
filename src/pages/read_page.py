@@ -89,6 +89,10 @@ class read_page(page):
                 with open(self.__SAVE_FILE, "r") as save_file:
                     data = json.load(save_file)
                     self.__speed = data["speed"]
+                    idx = data[f"{self.__what_users_reading}_line_number"]
+                if idx == None:
+                    self.save_settings()
+                else:
                     self.__curr_idx = data[f"{self.__what_users_reading}_line_number"]
             except:
                 self.save_settings()
