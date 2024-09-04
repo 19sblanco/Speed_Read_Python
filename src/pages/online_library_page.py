@@ -40,7 +40,8 @@ class online_library_page(page):
         self.__menu_options.append(
             menu_option(
                 "Go back",
-                self.__online_content
+                self.__online_content,
+                self.__main_menu
             )
         )
         
