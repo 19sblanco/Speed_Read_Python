@@ -37,6 +37,7 @@ class read_page(page):
 
     def display(self):
         self.__running = True
+        finished_book = False
         while self.__running and self.__curr_idx < len(self.__lines):
             self.__lines_to_display.append(self.__lines[self.__curr_idx])
             super().clear_console()
@@ -45,7 +46,11 @@ class read_page(page):
                 print(line)
             time.sleep(self.__speed)
             self.__curr_idx += 1
+            if self.__curr_idx == len(self.__lines):
+                finished_book = True
 
+        if finished_book:
+            self.__curr_idx = 0
         self.cleanup()
 
     def change_speed(self, key):
