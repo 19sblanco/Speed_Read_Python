@@ -59,44 +59,6 @@ class online_content_page(page):
                 self.add_by_url
             )
         )
-        self.__menu_options.append(
-            menu_option(
-                "Remove Online Content",
-                self.remove_content
-            )
-        )
-
-    def remove_content(self):
-        dir_path = "texts/uploaded_text/"
-        files = os.listdir(dir_path)
-        if len(files) == 0:
-            print("No books to remove")
-            time.sleep(2)
-            self.__init__(self.__main_menu)
-
-        super().clear_console()
-        print(self.__DOWNLOAD_MENU)
-        for i in range(len(files)):
-            print()
-            print(f"{i}) " + files[i])
-
-        user_input = super().get_input(len(dir_path), "Select a book to remove")
-        content_name = files[user_input]
-        file_path = dir_path + content_name
-        try:
-            os.remove(file_path)
-            print(f"File {file_path} has been deleted successfully")
-        except FileNotFoundError:
-            print(f"File {file_path} does not exist")
-        except PermissionError:
-            print(f"Permission denied: cannot delete {file_path}")
-        except Exception as e:
-            print(f"An error occurred while deleting {file_path}: {str(e)}")
-        
-        self.__init__(self.__main_menu)
-
-
-
 
     def add_by_url(self):
         while True:
