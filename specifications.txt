@@ -1,0 +1,6 @@
+1. Display lines of text with certain length one by one
+2. Adjust speed that lines Display
+3. Place a "bookmark" in certain books
+4. Pull text from the web
+    * maybe a have a url input
+
