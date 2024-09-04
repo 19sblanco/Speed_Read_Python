@@ -65,8 +65,10 @@ class online_content_page(page):
             try:
                 url = input("Enter a url: ")
                 response = requests.get(url)
-                soup = BeautifulSoup(response.content, 'html.parser')
-
+                if response.status_code == 200:
+                    soup = BeautifulSoup(response.content, 'html.parser')
+                else:
+                    raise ValueError("")
                 break
             except:
                 print("Invalid url")
@@ -100,24 +102,3 @@ class online_content_page(page):
         
         self.__init__(self.__main_menu)
 
-
-
-
-
-
-
-
-
-
-"""
-Please enter a url: <url>
-
-process the url with beautiful soup and get
-    * <h1>
-    * <p>
-format text 
-    * make text 70 wide
-    1) get rid of new lines
-    2) 
-save text in file named <h1> "replace space with '_'"
-"""
