@@ -3,6 +3,7 @@ import os
 import platform
 from pages.main_menu import main_menu 
 
+
 """
 handles the ctrl-c signal
 """
@@ -13,6 +14,7 @@ def sigint_handler(sig, frame):
         os.system('clear')
     print("GoodBye!")
     exit(0)
+
 
 """
 project plans in file todo and specifications.txt
