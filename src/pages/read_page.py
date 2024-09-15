@@ -25,6 +25,7 @@ class read_page(page):
         self.__curr_idx = start_idx
         self.__main_menu = main_menu
         self.__lines_to_display = []
+        self.__lines_to_display_max_size = 10
         self.__SAVE_FILE = "save.json"
         self.__speed = 5  # default speed
         self.__listener = None
@@ -48,10 +49,12 @@ class read_page(page):
         self.__running = True
         finished_book = False
         while self.__running and self.__curr_idx < len(self.__lines):
+            if len(self.__lines_to_display) > self.__lines_to_display_max_size:
+                self.__lines_to_display = []
             self.__lines_to_display.append(self.__lines[self.__curr_idx])
             super().clear_console()
             print(self.__READ_MENU.format(speed=self.__speed))
-            for line in self.__lines_to_display[-10:]:  # Display last 10 lines
+            for line in self.__lines_to_display:  # Display last 10 lines
                 print(line)
             time.sleep(self.__speed)
             self.__curr_idx += 1
@@ -139,3 +142,4 @@ class read_page(page):
         }
         with open(self.__SAVE_FILE, "w") as save_file:
             json.dump(data, save_file, indent=4)
+
