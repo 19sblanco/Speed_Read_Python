@@ -44,11 +44,13 @@ class collection_page(page):
         collection_name = arguments[0]
         book_name = arguments[1]
         with open(f"texts/gospel_text/{collection_name}.txt", "r") as bom_file:
-            lines = bom_file.read().split("\n")
-            idx = None
-            for i in range(len(lines)):
-                if re.search(arguments[1], lines[i]):
-                    idx = i
+            content = bom_file.read()
+            lines = content.split("\n")
+            idx = 0
+            search_pattern = r'\s+'.join(re.escape(word) for word in book_name.split())
+            match = re.search(search_pattern, content)
+            if match:
+                idx = content[:match.end()].count('\n')
             what_users_reading = collection_name + "_" + book_name
             read_page(what_users_reading, lines, idx, arguments[2])
 
